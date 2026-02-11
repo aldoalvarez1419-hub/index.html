@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Amor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(to bottom, #0a0e17, #1a1f2e, #0a0e17);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            padding: 30px;
+            background-color: rgba(10, 14, 23, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(0, 150, 255, 0.3);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(100, 150, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            color: #e6f2ff;
+            text-shadow: 0 0 15px rgba(100, 150, 255, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .phrase-container {
+            background: rgba(20, 30, 48, 0.6);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 30px 0;
+            border-left: 5px solid #4a90e2;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phrase {
+            font-size: 1.6rem;
+            line-height: 1.8;
+            text-align: justify;
+            color: #d1e8ff;
+            font-style: italic;
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 3s ease-out;
+        }
+
+        .phrase::before {
+            content: "❝";
+            font-size: 4rem;
+            color: rgba(74, 144, 226, 0.3);
+            position: absolute;
+            top: -20px;
+            left: -10px;
+        }
+
+        .phrase::after {
+            content: "❞";
+            font-size: 4rem;
+            color: rgba(74, 144, 226, 0.3);
+            position: absolute;
+            bottom: -40px;
+            right: -10px;
+        }
+
+        .love-counter {
+            background: rgba(25, 40, 65, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 40px 0;
+            border-top: 3px solid #e63946;
+            border-bottom: 3px solid #e63946;
+        }
+
+        .love-counter h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #ffb6c1;
+        }
+
+        .counter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .time-unit {
+            background: rgba(10, 20, 40, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 120px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(100, 150, 255, 0.3);
+        }
+
+        .time-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #64b5f6;
+            text-shadow: 0 0 10px rgba(100, 181, 246, 0.7);
+        }
+
+        .time-label {
+            font-size: 1rem;
+            margin-top: 5px;
+            color: #a5d8ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .start-date {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            color: #90caf9;
+        }
+
+        /* Elementos decorativos del paisaje */
+        .moon {
+            position: fixed;
+            top: 50px;
+            right: 80px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, #f5f3ce, #e6e3b9);
+            border-radius: 50%;
+            box-shadow: 0 0 60px rgba(245, 243, 206, 0.8);
+            animation: moonFloat 15s infinite ease-in-out;
+            z-index: 1;
+        }
+
+        .moon::after {
+            content: "";
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            width: 30px;
+            height: 30px;
+            background: rgba(200, 200, 180, 0.4);
+            border-radius: 50%;
+        }
+
+        .tree {
+            position: fixed;
+            bottom: 0;
+            background-color: #1a3c29;
+            border-radius: 5px 5px 0 0;
+            z-index: 2;
+        }
+
+        .tree-1 {
+            left: 5%;
+            width: 40px;
+            height: 200px;
+        }
+
+        .tree-2 {
+            left: 15%;
+            width: 60px;
+            height: 280px;
+        }
+
+        .tree-3 {
+            right: 10%;
+            width: 50px;
+            height: 240px;
+        }
+
+        .tree-4 {
+            right: 20%;
+            width: 35px;
+            height: 180px;
+        }
+
+        .tree::before {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 120px solid #0a2919;
+        }
+
+        .tree-2::before {
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 180px solid #0a2919;
+        }
+
+        .tree-3::before {
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 150px solid #0a2919;
+        }
+
+        .tree-4::before {
+            border-left: 35px solid transparent;
+            border-right: 35px solid transparent;
+            border-bottom: 100px solid #0a2919;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+
+        .heart {
+            position: fixed;
+            color: #ff4081;
+            font-size: 24px;
+            opacity: 0;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .footer {
+            margin-top: 30px;
+            color: #a5d8ff;
+            font-size: 1.1rem;
+            padding: 20px;
+            border-top: 1px solid rgba(100, 150, 255, 0.2);
+            width: 100%;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes moonFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .phrase {
+                font-size: 1.3rem;
+            }
+            
+            .time-unit {
+                min-width: 90px;
+                padding: 10px;
+            }
+            
+            .time-value {
+                font-size: 1.8rem;
+            }
+            
+            .moon {
+                width: 80px;
+                height: 80px;
+                top: 20px;
+                right: 20px;
+            }
+            
+            .tree-1, .tree-2, .tree-3, .tree-4 {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="moon"></div>
+    
+    <!-- Árboles -->
+    <div class="tree tree-1"></div>
+    <div class="tree tree-2"></div>
+    <div class="tree tree-3"></div>
+    <div class="tree tree-4"></div>
+    
+    <!-- Estrellas -->
+    <div class="stars" id="stars-container"></div>
+    
+    <div class="container">
+        <h1><i class="fas fa-heart"></i> Para Mi Amor <i class="fas fa-heart"></i></h1>
+        
+        <div class="phrase-container">
+            <p class="phrase">Te me apareciste como un último salvavidas lanzado en medio de una vida que a partir de entonces estaba vacía. Me agarré a él con todas mis fuerzas y voluntariamente cerré los ojos a todo lo que podía poner en peligro esta última esperanza.</p>
+        </div>
+        
+        <div class="love-counter">
+            <h2><i class="fas fa-clock"></i> Nuestro amor comenzó hace:</h2>
+            <div class="counter">
+                <div class="time-unit">
+                    <div class="time-value" id="days">0</div>
+                    <div class="time-label">Días</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-value" id="hours">0</div>
+                    <div class="time-label">Horas</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-value" id="minutes">0</div>
+                    <div class="time-label">Minutos</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-value" id="seconds">0</div>
+                    <div class="time-label">Segundos</div>
+                </div>
+            </div>
+            <div class="start-date">Desde el 11 de noviembre de 2022 <i class="fas fa-calendar-heart"></i></div>
+        </div>
+        
+        <div class="footer">
+            <p>Cada segundo a tu lado es un regalo que atesoro en mi corazón.</p>
+            <p>Te amo más con cada latido <i class="fas fa-heartbeat"></i></p>
+        </div>
+    </div>
+
+    <script>
+        // Fecha de inicio: 11 de noviembre de 2022
+        const startDate = new Date('November 11, 2022 00:00:00').getTime();
+        
+        // Crear estrellas
+        function createStars() {
+            const starsContainer = document.getElementById('stars-container');
+            const starCount = 150;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Tamaño aleatorio
+                const size = Math.random() * 3 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Posición aleatoria
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // Retraso de animación aleatorio
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Crear corazones flotantes
+        function createHearts() {
+            const heartCount = 5;
+            
+            for (let i = 0; i < heartCount; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.innerHTML = '<i class="fas fa-heart"></i>';
+                    
+                    // Posición aleatoria
+                    heart.style.left = `${Math.random() * 100}%`;
+                    heart.style.fontSize = `${Math.random() * 20 + 15}px`;
+                    
+                    // Animación
+                    heart.style.animation = `fall ${Math.random() * 10 + 10}s linear infinite`;
+                    heart.style.animationDelay = `${Math.random() * 5}s`;
+                    
+                    document.body.appendChild(heart);
+                    
+                    // Eliminar después de la animación
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 15000);
+                }, i * 2000);
+            }
+        }
+        
+        // Actualizar contador
+        function updateCounter() {
+            const now = new Date().getTime();
+            const timePassed = now - startDate;
+            
+            // Calcular días, horas, minutos y segundos
+            const days = Math.floor(timePassed / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timePassed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timePassed % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timePassed % (1000 * 60)) / 1000);
+            
+            // Actualizar valores en el DOM
+            document.getElementById('days').textContent = days.toLocaleString();
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            createHearts();
+            updateCounter();
+            
+            // Actualizar contador cada segundo
+            setInterval(updateCounter, 1000);
+            
+            // Crear corazones periódicamente
+            setInterval(createHearts, 8000);
+            
+            // Efecto de escritura para la frase
+            const phrase = document.querySelector('.phrase');
+            const originalText = phrase.textContent;
+            phrase.textContent = '';
+            
+            let i = 0;
+            function typeWriter() {
+                if (i < originalText.length) {
+                    phrase.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 30);
+                }
+            }
+            
+            // Iniciar efecto de escritura después de 1 segundo
+            setTimeout(typeWriter, 1000);
+        });
+    </script>
+</body>
+</html>
